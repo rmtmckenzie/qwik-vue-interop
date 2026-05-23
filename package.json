@@ -1,0 +1,14 @@
+{
+  "name": "qwik-vue-monorepo",
+  "private": true,
+  "workspaces": [
+    "qwik-vue-interop",
+    "qwik-vue-ssr-demo",
+    "qwik-vue-client-demo",
+    "integration-tests"
+  ],
+  "scripts": {
+    "build:interop": "npm run build -w qwik-vue-interop",
+    "test": "npm test -w integration-tests"
+  }
+}

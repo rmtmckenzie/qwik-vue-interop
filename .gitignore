@@ -1,0 +1,9 @@
+node_modules
+.qwik
+dist
+lib
+lib-types
+tsconfig.tsbuildinfo
+test-results
+playwright-report
+.DS_Store
