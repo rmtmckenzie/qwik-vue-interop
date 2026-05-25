@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "qwik-vue-interop": ["../qwik-vue-interop/src/index.qwik.ts"]
     },
     "types": ["vite/client", "node"]
   },
