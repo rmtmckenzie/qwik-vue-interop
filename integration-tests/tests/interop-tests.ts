@@ -41,7 +41,7 @@ export function registerInteropTests(
 
   test('increment qwik 10 times and check that vite stuff still there after each click', async ({ page }) => {
     const url = getUrl();
-    await page.goto(url, { waitUntil: 'domcontentloaded' });
+    await page.goto(url);
 
     // Check that Vue/Vite card is visible
     await expect(page.locator('.vue-card')).toBeVisible({ timeout: 10000 });
