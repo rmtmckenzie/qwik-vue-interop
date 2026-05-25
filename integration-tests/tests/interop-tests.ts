@@ -9,6 +9,8 @@ export function registerInteropTests(
     const url = getUrl();
     await page.goto(url);
 
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     // Check that Vue/Vite card actually exists in the DOM
     await expect(page.locator('.vue-card')).toBeAttached({ timeout: 10000 });
     await expect(page.locator('.vue-card')).toBeVisible({ timeout: 10000 });
@@ -30,6 +32,8 @@ export function registerInteropTests(
     // Check that Vue/Vite card is visible
     await expect(page.locator('.vue-card')).toBeVisible({ timeout: 10000 });
 
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     const vueButton = page.locator('#vue-button');
     await vueButton.click();
 
@@ -42,6 +46,8 @@ export function registerInteropTests(
   test('increment qwik 10 times and check that vite stuff still there after each click', async ({ page }) => {
     const url = getUrl();
     await page.goto(url);
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     // Check that Vue/Vite card is visible
     await expect(page.locator('.vue-card')).toBeVisible({ timeout: 10000 });
