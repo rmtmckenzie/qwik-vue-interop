@@ -9,6 +9,7 @@ jobs:
   publish:
     name: Build, Test & Publish
     runs-on: ubuntu-latest
+    environment: production
 
     # Crucial for Trusted Publishing (OIDC) and Provenance
     permissions:
