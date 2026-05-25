@@ -8,7 +8,21 @@
     "integration-tests"
   ],
   "scripts": {
+    "client:preview": "npm run build:client && npm run serve:client",
+    "ssr:preview": "npm run build:ssr && npm run serve:ssr",
+    "dev:client": "npm run dev -w qwik-vue-client-demo",
+    "dev:ssr": "npm run dev -w qwik-vue-ssr-demo",
     "build:interop": "npm run build -w qwik-vue-interop",
-    "test": "npm test -w integration-tests"
+    "build:client": "npm run build -w qwik-vue-client-demo",
+    "build:ssr": "npm run build -w qwik-vue-ssr-demo",
+    "build:all": "npm run build:interop && npm run build:client && npm run build:ssr",
+    "serve:client": "npm run serve -w qwik-vue-client-demo",
+    "serve:ssr": "npm run serve -w qwik-vue-ssr-demo",
+    "test": "npm test -w integration-tests",
+    "build+test": "npm run build:all && npm run test"
+  },
+  "devDependencies": {
+    "ignore": "^5.3.1",
+    "semver": "^7.5.4"
   }
 }

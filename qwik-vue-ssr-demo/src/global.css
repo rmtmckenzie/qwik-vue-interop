@@ -204,7 +204,7 @@ body {
   font-size: 0.9rem;
   line-height: 1.6;
   color: #A3FFA3;
-  max-height: 150px;
+  height: 150px;
   overflow-y: auto;
 }
 

@@ -16,7 +16,7 @@ import {
 } from '@builder.io/qwik';
 import { isBrowser, isServer } from '@builder.io/qwik/build';
 import type { QwikifyProps, QwikifyOptions } from "./types";
-import { h, createSSRApp, ref, type Ref } from "vue";
+import { h, createSSRApp, createApp, ref, type Ref } from "vue";
 import { renderToString } from "vue/server-renderer";
 import { type Component as VueComponent, ComponentPublicInstance, App as VueApp } from "vue";
 
@@ -47,7 +47,24 @@ export function qwikifyVueQrl<PROPS extends {}>(
 
       if (hostRef.value) {
         const ssrCtx = ref({ ...toVueProps(trackedProps) }) as Ref<PROPS>;
-        const app = createSSRApp({
+        
+        // Clean up Qwik boundary comments from the container to prevent Vue 3 hydration mismatches
+        const container = hostRef.value;
+        const walker = document.createTreeWalker(container, NodeFilter.SHOW_COMMENT);
+        const comments: Comment[] = [];
+        let node;
+        while ((node = walker.nextNode())) {
+          comments.push(node as Comment);
+        }
+        for (const comment of comments) {
+          comment.remove();
+        }
+
+        // Use createApp for client-only components (no SSR HTML exists),
+        // and createSSRApp for server-rendered components to hydrate them.
+        const createAppFn = isClientOnly ? createApp : createSSRApp;
+
+        const app = createAppFn({
           inject: ['__ssrCtx'],
           render() {
             return h(Cmp, ssrCtx.value);
@@ -55,7 +72,7 @@ export function qwikifyVueQrl<PROPS extends {}>(
         })
           .provide('__ssrCtx', ssrCtx);
 
-        const instance = app.mount(hostRef.value, true);
+        const instance = app.mount(hostRef.value);
         appState.value = noSerialize({
           app,
           instance,
@@ -63,11 +80,12 @@ export function qwikifyVueQrl<PROPS extends {}>(
         });
       }
 
+      // Only unmount Vue when the component is actually being destroyed (signal went false),
+      // NOT during prop-change re-runs where signal is still true.
       cleanup(() => {
         if (appState.value && !signal.value) {
           appState.value.app.unmount();
           appState.value = undefined;
-          signal.value = false;
           hostRef.value = undefined;
         }
       });
