@@ -1,6 +1,8 @@
 {
   "name": "qwik-vue-interop",
   "version": "1.0.0",
+  "repository": "https://github.com/rmtmckenzie/qwik-vue-interop",
+  "license": "MIT",
   "description": "Render Vue components inside Qwik applications with reactivity and selective hydration.",
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
