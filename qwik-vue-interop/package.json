@@ -1,6 +1,6 @@
 {
   "name": "qwik-vue-interop",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Render Vue components inside Qwik applications with reactivity and selective hydration.",
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
