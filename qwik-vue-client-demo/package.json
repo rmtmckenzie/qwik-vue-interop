@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@builder.io/qwik": "^1.20.0",
-    "@keepsta/qwik-vue-interop": "*",
+    "qwik-vue-interop": "*",
     "express": "4.22.0",
     "vue": "^3.4.0"
   },

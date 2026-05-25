@@ -1,5 +1,5 @@
 import { component$, useSignal, $ } from "@builder.io/qwik";
-import { qwikifyVue$ } from "@keepsta/qwik-vue-interop";
+import { qwikifyVue$ } from "qwik-vue-interop";
 import VueCounter from "../components/Counter.vue";
 
 const QVueCounter = qwikifyVue$<{
